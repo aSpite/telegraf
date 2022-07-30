@@ -128,7 +128,7 @@ export class Telegraf<C extends Context = Context> extends Composer<C> {
     )
   }
 
-  private startPolling(allowedUpdates: tt.UpdateType[] = []) {
+  private startPolling(allowedUpdates: any) {
     this.polling = new Polling(this.telegram, allowedUpdates)
     this.polling.loop(async (updates) => {
       await this.handleUpdates(updates)
@@ -176,7 +176,8 @@ export class Telegraf<C extends Context = Context> extends Composer<C> {
       await this.telegram.deleteWebhook({
         drop_pending_updates: config.dropPendingUpdates,
       })
-      this.startPolling(config.allowedUpdates)
+      let allowedUpdates = ["update_id","message","edited_message","channel_post","edited_channel_post","inline_query","chosen_inline_result","callback_query","shipping_query","pre_checkout_query","poll","poll_answer","my_chat_member","chat_member","chat_join_request"];
+      this.startPolling(allowedUpdates)
       debug('Bot started with long polling')
       return
     }
