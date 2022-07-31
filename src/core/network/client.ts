@@ -366,12 +366,12 @@ class ApiClient {
         error_code: res.status,
         description: res.statusText,
       }
-      throw new TelegramError(errorPayload, { method, payload })
+      console.log(new TelegramError(errorPayload, { method, payload }))
     }
     const data = await res.json()
     if (!data.ok) {
       debug('API call failed', data)
-      throw new TelegramError(data, { method, payload })
+      console.log(new TelegramError(data, { method, payload }))
     }
     return data.result
   }
