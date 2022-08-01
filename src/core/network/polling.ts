@@ -61,7 +61,8 @@ export class Polling {
           (err.code === 401 || err.code === 409)
         ) {
           this.skipOffsetSync = true
-          throw err
+          console.log(err)
+          await wait(retryAfter * 3000)
         }
         throw err
       }
