@@ -64,7 +64,8 @@ export class Polling {
           console.log(err)
           await wait(5000)
         }
-        throw err
+        console.log(err)
+        await wait(5000)
       }
     } while (!this.abortController.signal.aborted)
   }
